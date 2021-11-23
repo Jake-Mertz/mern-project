@@ -37,7 +37,7 @@ try {
     .find(query)
 } catch (e) {
   console.error(`Unable to issue find command, ${e}`);
-  return { restaurantList: [], totalNumRestaurants: 0}
+  return { restaurantsList: [], totalNumRestaurants: 0}
   }
 
   const displayCursor = cursor.limit(restaurantsPerPage).skip(restaurantsPerPage * page)
@@ -46,11 +46,12 @@ try {
     const restaurantsList = await displayCursor.toArray();
     const totalNumRestaurants = await restaurants.countDocuments(query);
 
-    return { restaurantList, totalNumRestaurants }
+    return { restaurantsList, totalNumRestaurants }
   } catch(e) {
     console.error(
-      `Unable to convert cursor to array ot problem counting documents, ${e}`
+      `Unable to convert cursor to array or problem counting documents, ${e}`
     )
-    return { restaurantList: [], totalNumRestaurants: 0 }
+    return { restaurantsList: [], totalNumRestaurants: 0 }
+    }
   }
 }
